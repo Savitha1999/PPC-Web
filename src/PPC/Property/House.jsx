@@ -981,88 +981,88 @@
 
 
 
-// import React, { useState, useEffect } from "react";
-// import axios from "axios";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-// export default function House() {
-//   const [houseData, setHouseData] = useState([]);  // Store fetched data
-//   const [loading, setLoading] = useState(true);  // Loading state
-//   const [error, setError] = useState(null);  // Error state
+export default function House() {
+  const [houseData, setHouseData] = useState([]);  // Store fetched data
+  const [loading, setLoading] = useState(true);  // Loading state
+  const [error, setError] = useState(null);  // Error state
 
-//   useEffect(() => {
-//     const fetchHouseData = async () => {
-//       setLoading(true);  // Start loading
-//       setError(null);  // Reset any previous error
+  useEffect(() => {
+    const fetchHouseData = async () => {
+      setLoading(true);  // Start loading
+      setError(null);  // Reset any previous error
 
-//       try {
-//         // Make the API call
-//         const response = await axios.post("https://ppcpondy.com/application/detail.php", {
-//           ppc_id: "10450",  // Example request parameter
-//         });
+      try {
+        // Make the API call
+        const response = await axios.post("https://ppcpondy.com/application/detail.php", {
+          ppc_id: "10450",  // Example request parameter
+        });
 
-//         console.log('Fetched Data:', response.data); // Check the response structure
+        console.log('Fetched Data:', response.data); // Check the response structure
 
-//         // Check if the response is an array
-//         if (Array.isArray(response.data)) {
-//           setHouseData(response.data);  // Set the fetched data
-//         } else {
-//           setError("Data format is invalid.");  // If it's not an array
-//         }
-//       } catch (error) {
-//         setError("Failed to fetch data. Please try again later.");  // Error handling
-//         console.error("Error fetching data:", error);
-//       } finally {
-//         setLoading(false);  // End loading state
-//       }
-//     };
+        // Check if the response is an array
+        if (Array.isArray(response.data)) {
+          setHouseData(response.data);  // Set the fetched data
+        } else {
+          setError("Data format is invalid.");  // If it's not an array
+        }
+      } catch (error) {
+        setError("Failed to fetch data. Please try again later.");  // Error handling
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);  // End loading state
+      }
+    };
 
-//     fetchHouseData();  // Call the function to fetch data when component mounts
-//   }, []);  // Empty dependency array means this effect runs once when the component mounts
+    fetchHouseData();  // Call the function to fetch data when component mounts
+  }, []);  // Empty dependency array means this effect runs once when the component mounts
 
-//   return (
-//     <div className="container mt-5">
-//       {loading && <div>Loading house data...</div>}  {/* Loading message */}
+  return (
+    <div className="container mt-5">
+      {loading && <div>Loading house data...</div>}  {/* Loading message */}
 
-//       {error && <div className="alert alert-danger">{error}</div>}  {/* Error message */}
+      {error && <div className="alert alert-danger">{error}</div>}  {/* Error message */}
 
-//       {/* Check if houseData exists and render data directly */}
-//       {houseData.length > 0 ? (
-//         houseData.map((house) => (
-//           <div className="card mb-4" key={house.ppc_id}>
-//             <div className="row">
-//               <div className="col-md-6">
-//                 {/* Property image, fallback if not available */}
-//                 <img
-//                   src={house.property_image || "https://via.placeholder.com/500x300?text=No+Image+Available"}
-//                   alt="house"
-//                   className="img-fluid"
-//                 />
-//               </div>
-//               <div className="col-md-6 p-5">
-//                 <h5>Price: ₹{house.price}</h5>
-//                 <p><strong>Location:</strong> {house.state}, {house.city}</p>
-//                 <p><strong>Type:</strong> {house.property_type} ({house.total_area} {house.area_unit})</p>
-//                 <p><strong>Facing:</strong> {house.facing}</p>
-//                 <p><strong>Posted by:</strong> {house.posted_by}</p>
-//                 <p><strong>Activation Date:</strong> {new Date(house.activation_date).toLocaleDateString()}</p>
-//                 <p><strong>Contact:</strong> {house.owner_phone}</p>
-//                 <p><strong>Description:</strong> {house.description || "No description available"}</p>
+      {/* Check if houseData exists and render data directly */}
+      {houseData.length > 0 ? (
+        houseData.map((house) => (
+          <div className="card mb-4" key={house.ppc_id}>
+            <div className="row">
+              <div className="col-md-6">
+                {/* Property image, fallback if not available */}
+                <img
+                  src={house.property_image || "https://via.placeholder.com/500x300?text=No+Image+Available"}
+                  alt="house"
+                  className="img-fluid"
+                />
+              </div>
+              <div className="col-md-6 p-5">
+                <h5>Price: ₹{house.price}</h5>
+                <p><strong>Location:</strong> {house.state}, {house.city}</p>
+                <p><strong>Type:</strong> {house.property_type} ({house.total_area} {house.area_unit})</p>
+                <p><strong>Facing:</strong> {house.facing}</p>
+                <p><strong>Posted by:</strong> {house.posted_by}</p>
+                <p><strong>Activation Date:</strong> {new Date(house.activation_date).toLocaleDateString()}</p>
+                <p><strong>Contact:</strong> {house.owner_phone}</p>
+                <p><strong>Description:</strong> {house.description || "No description available"}</p>
 
-//                 {/* Optionally display more fields if required */}
-//                 <p><strong>Bank Loan Available:</strong> {house.bank_loan === "Yes" ? "Yes" : "No"}</p>
-//                 <p><strong>Ownership:</strong> {house.ownership}</p>
-//                 <p><strong>Sale Type:</strong> {house.sale_type}</p>
-//                 <p><strong>Sale Mode:</strong> {house.sale_mode}</p>
-//               </div>
-//             </div>
-//           </div>
-//         ))
-//       ) : (
-//         !loading && <div>No house data available</div> 
-//       )}
-//     </div>
-//   );
-// }
+                {/* Optionally display more fields if required */}
+                <p><strong>Bank Loan Available:</strong> {house.bank_loan === "Yes" ? "Yes" : "No"}</p>
+                <p><strong>Ownership:</strong> {house.ownership}</p>
+                <p><strong>Sale Type:</strong> {house.sale_type}</p>
+                <p><strong>Sale Mode:</strong> {house.sale_mode}</p>
+              </div>
+            </div>
+          </div>
+        ))
+      ) : (
+        !loading && <div>No house data available</div> 
+      )}
+    </div>
+  );
+}
 
 
 
